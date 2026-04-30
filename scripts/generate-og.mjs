@@ -87,7 +87,7 @@ const headlineSvg = `
         font-weight="500"
         letter-spacing="2"
         fill="${SMOKE}">
-    9 DEGREES · TREC, KL · WHATSAPP +60 17-949 8579
+    9 DEGREES · TREC, KL · WHATSAPP +60 12-404 4598
   </text>
 </svg>
 `;
