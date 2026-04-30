@@ -1,0 +1,125 @@
+---
+const phone = "60179498579";
+const ig = "ninedegrees_kl";
+---
+
+<section class="strobe" id="contact" aria-labelledby="strobe-heading">
+  {/* Massive backdrop glyph — works as cyan-on-cyan watermark */}
+  <div class="strobe__watermark" aria-hidden="true">
+    <span>9°</span>
+  </div>
+
+  <div class="strobe__inner gutter">
+    <p class="strobe__eyebrow t-mono-caps reveal">
+      <span>03 / Talk to 9°</span>
+      <span class="strobe__rule" aria-hidden="true"></span>
+      <span>One thumb · One tap</span>
+    </p>
+
+    <h2 class="strobe__headline t-display reveal" id="strobe-heading">
+      <span class="strobe__line">Run your room.</span>
+      <span class="strobe__line">Message <em>NINE°</em>.</span>
+    </h2>
+
+    <p class="strobe__sub reveal">
+      We market clubs in Kuala Lumpur. WhatsApp us before
+      <span class="strobe__nowrap">tonight's door opens.</span>
+    </p>
+
+    <div class="strobe__cta reveal">
+      <a class="btn btn--ink" href={`https://wa.me/${phone}`} target="_blank" rel="noopener">
+        WhatsApp Us
+        <svg class="btn__arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M2 7 H12 M7 2 L12 7 L7 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+        </svg>
+      </a>
+      <a class="btn btn--ink-ghost" href={`https://instagram.com/${ig}`} target="_blank" rel="noopener">
+        @ninedegrees_kl
+        <svg class="btn__arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .strobe {
+    background: var(--c-cyan);
+    color: var(--c-room);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding-block: var(--section-y-loose);
+  }
+
+  .strobe__watermark {
+    position: absolute;
+    inset: auto -8% -25% auto;
+    z-index: 0;
+    color: oklch(82% 0.19 184);
+    line-height: 0.85;
+    font-weight: var(--fw-black);
+    font-size: clamp(20rem, 50vw, 48rem);
+    letter-spacing: -0.04em;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .strobe__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .strobe__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: oklch(20% 0.05 188);
+  }
+  .strobe__rule {
+    flex: 0 1 8rem;
+    height: 1px;
+    background: oklch(20% 0.05 188 / 0.4);
+  }
+
+  .strobe__headline {
+    color: var(--c-room);
+    max-width: 18ch;
+    margin: 0;
+    text-shadow: 0 1px 0 oklch(82% 0.19 184 / 0.4);
+  }
+  .strobe__line { display: block; }
+  .strobe__line em {
+    font-style: normal;
+    color: var(--c-strobe);
+    -webkit-text-stroke: 1.5px var(--c-room);
+    paint-order: stroke fill;
+  }
+
+  .strobe__sub {
+    color: var(--c-room);
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-weight: var(--fw-medium);
+    line-height: 1.4;
+    max-width: 38ch;
+    margin: 0;
+  }
+  .strobe__nowrap { white-space: nowrap; }
+
+  .strobe__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-3);
+  }
+
+  @media (max-width: 720px) {
+    .strobe__watermark { font-size: clamp(18rem, 90vw, 30rem); inset: auto -15% -20% auto; }
+    .strobe__cta .btn { width: 100%; justify-content: space-between; }
+  }
+</style>

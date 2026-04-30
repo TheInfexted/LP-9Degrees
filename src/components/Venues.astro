@@ -1,0 +1,210 @@
+---
+/**
+ * Two full-bleed venue posters, alternating type position.
+ * Photos are Unsplash placeholders — replace with real venue shots
+ * in public/img/ and update the src attributes.
+ */
+interface Venue {
+  id: string;
+  index: string;
+  name: string;
+  nameLines: string[];
+  meta: string[];
+  photo: string;
+  alt: string;
+  align: "bl" | "tr"; // bottom-left / top-right
+  todo: string;
+}
+
+const venues: Venue[] = [
+  {
+    id: "venue-404",
+    index: "01",
+    name: "404 Club Not Found",
+    nameLines: ["404", "Club Not", "Found"],
+    meta: ["Mandopop · Hip-hop", "TREC, Kuala Lumpur"],
+    photo: "/img/404.jpg",
+    alt: "Inside 404 Club Not Found, Kuala Lumpur, during a Mandopop / hip-hop night.",
+    align: "bl",
+    todo: "Replace with photograph from @404clubnotfound.kl Instagram",
+  },
+  {
+    id: "venue-nono",
+    index: "02",
+    name: "Nono Club",
+    nameLines: ["NONO", "Club"],
+    meta: ["Open format · Chinese club", "TREC, Kuala Lumpur"],
+    photo: "/img/nono.jpg",
+    alt: "Inside Nono Club, Kuala Lumpur, during a Red Bull Dance Your Style after-party.",
+    align: "tr",
+    todo: "Replace with photograph from @nonoclub.kl Instagram",
+  },
+];
+---
+
+<section class="venues" id="venues" aria-label="Venues we currently market">
+  <div class="venues__intro gutter">
+    <p class="venues__eyebrow t-mono-caps reveal">
+      <span>Currently on our decks</span>
+      <span aria-hidden="true" class="venues__rule"></span>
+      <span class="venues__count">2 venues</span>
+    </p>
+  </div>
+
+  {venues.map((v) => (
+    <article class={`venue venue--${v.align}`} id={v.id}>
+      {/* eslint-disable-next-line astro/missing-alt */}
+      <img
+        class="venue__photo"
+        src={v.photo}
+        alt={v.alt}
+        loading="lazy"
+        decoding="async"
+        width="1800"
+        height="1200"
+        data-todo={v.todo}
+      />
+      <div class="venue__shade" aria-hidden="true"></div>
+
+      <div class="venue__body">
+        <span class="venue__index t-mono-caps reveal">— {v.index}</span>
+        <h2 class="venue__name t-poster reveal">
+          {v.nameLines.map((line) => <span class="venue__line">{line}</span>)}
+        </h2>
+        <ul class="venue__meta reveal" aria-label="Venue details">
+          {v.meta.map((m) => <li class="t-mono-caps">{m}</li>)}
+        </ul>
+      </div>
+    </article>
+  ))}
+</section>
+
+<style>
+  .venues {
+    background: var(--c-room);
+    padding-block: var(--section-y) 0;
+    position: relative;
+  }
+
+  .venues__intro {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-bottom: var(--section-y-tight);
+  }
+
+  .venues__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: var(--c-smoke);
+    flex-wrap: wrap;
+  }
+  .venues__rule {
+    flex: 1 1 0;
+    height: 1px;
+    background: color-mix(in oklch, var(--c-strobe) 12%, transparent);
+    min-width: 2rem;
+    max-width: 320px;
+  }
+  .venues__count {
+    color: var(--c-cyan);
+  }
+
+  .venue {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(420px, 75svh, 720px);
+    display: grid;
+    overflow: hidden;
+    background: var(--c-booth);
+  }
+
+  .venue__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    transition: transform 1.4s var(--ease-out-quint), filter 1.4s var(--ease-out-quint);
+    filter: saturate(0.85) contrast(1.05) brightness(0.78);
+  }
+  .venue:hover .venue__photo {
+    transform: scale(1.03);
+    filter: saturate(1) contrast(1.1) brightness(0.85);
+  }
+
+  .venue__shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      oklch(8% 0.01 200 / 0.4) 0%,
+      oklch(8% 0.01 200 / 0.1) 35%,
+      oklch(8% 0.01 200 / 0.55) 75%,
+      oklch(8% 0.01 200 / 0.85) 100%
+    );
+  }
+  .venue--tr .venue__shade {
+    background: linear-gradient(
+      180deg,
+      oklch(8% 0.01 200 / 0.85) 0%,
+      oklch(8% 0.01 200 / 0.4) 35%,
+      oklch(8% 0.01 200 / 0.15) 70%,
+      oklch(8% 0.01 200 / 0.55) 100%
+    );
+  }
+
+  .venue__body {
+    position: relative;
+    z-index: 2;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    width: 100%;
+    display: grid;
+    gap: var(--s-4);
+    align-self: end;
+    justify-self: start;
+    max-width: 880px;
+  }
+  .venue--tr .venue__body {
+    align-self: start;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .venue__index {
+    color: var(--c-cyan);
+  }
+
+  .venue__name {
+    color: var(--c-strobe);
+    text-shadow: 0 2px 24px oklch(0% 0 0 / 0.6);
+  }
+  .venue__line { display: block; }
+
+  .venue__meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-4);
+    color: var(--c-strobe);
+  }
+  .venue--tr .venue__meta { justify-content: flex-end; }
+  .venue__meta li {
+    color: var(--c-smoke);
+    font-size: 0.75rem;
+  }
+  .venue__meta li:first-child {
+    color: var(--c-strobe);
+  }
+
+  /* On very wide viewports, give the two venues a slight inset to feel
+     more like posters and less like full edge-to-edge banners. */
+  @media (min-width: 1400px) {
+    .venue { margin-inline: 0; }
+  }
+</style>

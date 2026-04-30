@@ -1,0 +1,191 @@
+---
+/**
+ * Set-list rhythm. RA / Mixmag listing voice. No card backgrounds —
+ * type ranged across the page with hairline dividers between rows.
+ */
+
+interface Night {
+  date: string;
+  iso: string;
+  event: string;
+  venue: "404" | "NONO";
+  upcoming?: boolean;
+}
+
+const nights: Night[] = [
+  { iso: "2026-05-01", date: "01 MAY",      event: "DJ Mia",                                                            venue: "404",  upcoming: true },
+  { iso: "2026-05-01", date: "01 MAY",      event: "Nahsyk",                                                            venue: "NONO", upcoming: true },
+  { iso: "2026-04-25", date: "25 APR",      event: "DJ Joleen",                                                         venue: "404"  },
+  { iso: "2026-04-22", date: "22 — 25 APR", event: "Silk Night Party 2.0",                                              venue: "404"  },
+  { iso: "2026-04-18", date: "18 APR",      event: "DJ MoskiLove",                                                      venue: "404"  },
+  { iso: "2026-04-11", date: "11 APR",      event: "DJ HOWL",                                                           venue: "404"  },
+  { iso: "2026-04-07", date: "07 APR",      event: "NoNo × Red Bull MY · Dance Your Style Malaysia Tour After Party",  venue: "NONO" },
+];
+---
+
+<section class="nights" id="nights" aria-labelledby="nights-heading">
+  <div class="nights__inner gutter">
+    <header class="nights__head">
+      <p class="nights__eyebrow t-mono-caps reveal">
+        <span>02 / Selected nights</span>
+      </p>
+      <h2 class="nights__title t-headline reveal" id="nights-heading">
+        Recent and on deck. <em>Apr — May 2026.</em>
+      </h2>
+    </header>
+
+    <ol class="nights__list reveal-stagger" role="list">
+      {nights.map((n) => (
+        <li class={`night${n.upcoming ? " night--up" : ""}`}>
+          <time class="night__date t-mono-caps" datetime={n.iso}>
+            {n.date}
+            {n.upcoming && <span class="night__badge" aria-label="Upcoming">●</span>}
+          </time>
+          <p class="night__event t-event">{n.event}</p>
+          <span class={`night__venue night__venue--${n.venue.toLowerCase()}`}>{n.venue}</span>
+        </li>
+      ))}
+    </ol>
+
+    <p class="nights__foot t-meta reveal">
+      Tagging us isn't a contact channel. To book a night, talk to 9Degrees direct.
+    </p>
+  </div>
+</section>
+
+<style>
+  .nights {
+    background: var(--c-room);
+    padding-block: var(--section-y) var(--section-y-loose);
+  }
+
+  .nights__inner {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .nights__head {
+    display: grid;
+    gap: var(--s-5);
+    margin-bottom: var(--s-9);
+    max-width: 60ch;
+  }
+
+  .nights__eyebrow {
+    color: var(--c-smoke);
+  }
+
+  .nights__title {
+    color: var(--c-strobe);
+    max-width: 22ch;
+  }
+  .nights__title em {
+    font-style: normal;
+    color: var(--c-cyan);
+  }
+
+  .nights__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: var(--rule-hairline);
+  }
+
+  .night {
+    display: grid;
+    grid-template-columns: minmax(7.5rem, 12rem) 1fr auto;
+    align-items: baseline;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    padding-block: clamp(1.1rem, 2.4vw, 1.6rem);
+    border-bottom: var(--rule-hairline);
+    transition: padding-inline var(--d-normal) var(--ease-out-quart),
+                background-color var(--d-fast) var(--ease-out-quart);
+    padding-inline: 0;
+    position: relative;
+  }
+  .night:hover {
+    background: linear-gradient(
+      90deg,
+      transparent 0,
+      oklch(20% 0.02 200 / 0.4) 8%,
+      oklch(20% 0.02 200 / 0.4) 92%,
+      transparent 100%
+    );
+    padding-inline: clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  .night__date {
+    color: var(--c-smoke);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    white-space: nowrap;
+    transition: color var(--d-fast) var(--ease-out-quart);
+  }
+  .night--up .night__date { color: var(--c-strobe); }
+
+  .night__badge {
+    color: var(--c-cyan);
+    font-size: 0.55em;
+    line-height: 1;
+    transform: translateY(-1px);
+    box-shadow: var(--bloom-cyan);
+  }
+
+  .night__event {
+    color: var(--c-strobe);
+    text-wrap: balance;
+    transition: color var(--d-fast) var(--ease-out-quart);
+  }
+  .night:hover .night__event { color: var(--c-cyan); }
+
+  .night__venue {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-caps);
+    text-transform: uppercase;
+    padding: 0.45rem 0.65rem;
+    color: var(--c-strobe);
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--c-strobe) 22%, transparent);
+    white-space: nowrap;
+  }
+  .night__venue--404 {
+    color: var(--c-strobe);
+  }
+  .night__venue--nono {
+    color: var(--c-cyan);
+    box-shadow: inset 0 0 0 1px var(--c-cyan);
+  }
+
+  .nights__foot {
+    color: var(--c-smoke-dim);
+    margin-top: var(--s-7);
+    max-width: 60ch;
+  }
+
+  /* Mobile: stack into rows */
+  @media (max-width: 720px) {
+    .night {
+      grid-template-columns: 1fr auto;
+      gap: var(--s-2);
+    }
+    .night__date {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      font-size: 0.7rem;
+    }
+    .night__venue {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.55rem;
+    }
+    .night__event {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      font-size: 1.25rem;
+    }
+    .night:hover { padding-inline: 0; background: none; }
+  }
+</style>

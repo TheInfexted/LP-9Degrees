@@ -1,0 +1,203 @@
+---
+import Wordmark from "./Wordmark.astro";
+const phone = "60179498579"; // +60 17-949 8579
+const ig = "ninedegrees_kl";
+---
+
+<header class="topbar gutter" id="top" aria-label="Site header">
+  <Wordmark size="sm" />
+  <nav class="topnav" aria-label="Primary">
+    <a href="#venues">Venues</a>
+    <a href="#nights">Recent</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero grain" aria-labelledby="hero-headline">
+  <div class="hero__inner gutter">
+    <p class="hero__eyebrow t-mono-caps reveal">
+      <span class="hero__dot" aria-hidden="true"></span>
+      Open for new clubs &amp; nights, KL
+    </p>
+
+    <h1 class="hero__headline t-display reveal" id="hero-headline">
+      <span class="hero__line">We pack</span>
+      <span class="hero__line">the rooms</span>
+      <span class="hero__line">that run <em>KL</em>.</span>
+    </h1>
+
+    <p class="hero__sub t-body reveal">
+      Nightlife marketing, Kuala Lumpur. Currently shaping the nights at
+      <span class="hero__venue">404 Club Not Found</span> and
+      <span class="hero__venue">Nono Club</span>.
+    </p>
+
+    <div class="hero__cta reveal">
+      <a class="btn btn--cyan" href={`https://wa.me/${phone}`} target="_blank" rel="noopener">
+        WhatsApp
+        <svg class="btn__arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M2 7 H12 M7 2 L12 7 L7 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+        </svg>
+      </a>
+      <a class="btn btn--ghost" href={`https://instagram.com/${ig}`} target="_blank" rel="noopener">
+        Instagram
+        <svg class="btn__arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <footer class="hero__meta gutter">
+    <span class="t-mono-caps">Kuala Lumpur</span>
+    <span class="hero__rule" aria-hidden="true"></span>
+    <span class="t-mono-caps">Est. 2025</span>
+    <span class="hero__rule" aria-hidden="true"></span>
+    <span class="t-mono-caps">9° / Nine Degrees</span>
+  </footer>
+</section>
+
+<style>
+  .topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: clamp(1rem, 2.5vw, 1.75rem);
+    z-index: var(--z-nav);
+  }
+
+  .topnav {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2.25rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-caps);
+    font-weight: var(--fw-medium);
+    color: var(--c-smoke);
+  }
+  .topnav a {
+    position: relative;
+    transition: color var(--d-fast) var(--ease-out-quart);
+  }
+  .topnav a:hover { color: var(--c-cyan); }
+  .topnav a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0;
+    height: 1px;
+    background: var(--c-cyan);
+    transition: width var(--d-normal) var(--ease-out-quart);
+  }
+  .topnav a:hover::after { width: 100%; }
+
+  /* On very narrow screens, hide nav text — wordmark is the anchor */
+  @media (max-width: 480px) {
+    .topnav { display: none; }
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 30% 100%,
+        oklch(20% 0.04 188 / 0.55),
+        transparent 75%
+      ),
+      var(--c-room);
+  }
+
+  .hero__inner {
+    align-self: end;
+    padding-block: clamp(8rem, 16vh, 12rem) clamp(2rem, 5vh, 3rem);
+    max-width: 1500px;
+    width: 100%;
+    margin-inline: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--c-smoke);
+    margin-bottom: var(--s-7);
+  }
+  .hero__dot {
+    width: 6px;
+    height: 6px;
+    background: var(--c-cyan);
+    border-radius: 50%;
+    box-shadow: var(--bloom-cyan);
+    animation: dot-pulse 2.4s var(--ease-out-quart) infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.92); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__dot { animation: none; opacity: 1; }
+  }
+
+  .hero__headline {
+    margin: 0 0 var(--s-7) calc(-0.04em);
+    max-width: 17ch;
+  }
+  .hero__line { display: block; }
+  .hero__line em {
+    font-style: normal;
+    color: var(--c-cyan);
+    font-feature-settings: "ss01";
+  }
+
+  .hero__sub {
+    color: var(--c-smoke);
+    max-width: 56ch;
+    margin-bottom: var(--s-7);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    line-height: 1.5;
+  }
+  .hero__venue {
+    color: var(--c-strobe);
+    font-weight: var(--fw-medium);
+    font-feature-settings: "ss01";
+  }
+
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  .hero__meta {
+    align-self: end;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    padding-block: clamp(1.25rem, 3vw, 2rem);
+    border-top: var(--rule-hairline);
+    color: var(--c-smoke-dim);
+    font-size: 0.7rem;
+    z-index: 2;
+    position: relative;
+  }
+  .hero__rule {
+    flex: 0 0 auto;
+    width: 0.5rem;
+    height: 1px;
+    background: color-mix(in oklch, var(--c-strobe) 20%, transparent);
+  }
+  @media (max-width: 600px) {
+    .hero__meta { flex-wrap: wrap; }
+  }
+</style>

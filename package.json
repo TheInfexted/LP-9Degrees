@@ -1,0 +1,17 @@
+{
+  "name": "lp-9degrees",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NINE° landing page. KL nightlife marketing agency.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && find dist -name .DS_Store -delete 2>/dev/null || true",
+    "preview": "astro preview --host",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}

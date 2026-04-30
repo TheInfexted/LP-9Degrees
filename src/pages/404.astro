@@ -1,0 +1,181 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Wordmark from "../components/Wordmark.astro";
+const phone = "60179498579";
+const ig = "ninedegrees_kl";
+---
+
+<Layout
+  title="404 not found · 9 Degrees"
+  description="Page not found. The room's a few floors over."
+>
+  <header class="topbar gutter">
+    <Wordmark size="sm" />
+    <nav class="topnav" aria-label="Primary">
+      <a href="/#venues">Venues</a>
+      <a href="/#nights">Recent</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="nf grain" id="main">
+    <div class="nf__inner gutter">
+      <p class="nf__eyebrow t-mono-caps">
+        <span>Error · 404</span>
+        <span class="nf__rule" aria-hidden="true"></span>
+        <span>Wrong room</span>
+      </p>
+
+      <h1 class="nf__headline t-display">
+        <span class="nf__line">Club <em>not</em></span>
+        <span class="nf__line">Found.</span>
+      </h1>
+
+      <p class="nf__sub">
+        Different 404. The page you're looking for isn't on the door tonight.
+        The actual nights, the venues, and the way to reach 9 Degrees are
+        all on the home page.
+      </p>
+
+      <div class="nf__cta">
+        <a class="btn btn--cyan" href="/">
+          Back to NINE°
+          <svg class="btn__arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+            <path d="M2 7 H12 M7 2 L12 7 L7 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+          </svg>
+        </a>
+        <a class="btn btn--ghost" href={`https://wa.me/${phone}`} target="_blank" rel="noopener">
+          WhatsApp Us
+          <svg class="btn__arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+            <path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <footer class="nf__meta gutter">
+      <span class="t-mono-caps">Kuala Lumpur</span>
+      <span class="nf__hr" aria-hidden="true"></span>
+      <span class="t-mono-caps">Est. 2025</span>
+      <span class="nf__hr" aria-hidden="true"></span>
+      <span class="t-mono-caps">@{ig}</span>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  .topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: clamp(1rem, 2.5vw, 1.75rem);
+    z-index: var(--z-nav);
+  }
+  .topnav {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2.25rem);
+    font-family: var(--font-mono);
+    font-size: var(--t-meta);
+    text-transform: uppercase;
+    letter-spacing: var(--ls-caps);
+    font-weight: var(--fw-medium);
+    color: var(--c-smoke);
+  }
+  .topnav a {
+    transition: color var(--d-fast) var(--ease-out-quart);
+  }
+  .topnav a:hover { color: var(--c-cyan); }
+  @media (max-width: 480px) {
+    .topnav { display: none; }
+  }
+
+  .nf {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 18% 105%,
+        oklch(20% 0.04 188 / 0.55),
+        transparent 75%
+      ),
+      var(--c-room);
+  }
+
+  .nf__inner {
+    align-self: end;
+    padding-block: clamp(8rem, 16vh, 12rem) clamp(2rem, 5vh, 3rem);
+    max-width: 1500px;
+    width: 100%;
+    margin-inline: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .nf__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: var(--c-smoke);
+    margin-bottom: var(--s-7);
+    flex-wrap: wrap;
+  }
+  .nf__rule {
+    width: 0.5rem;
+    height: 1px;
+    background: color-mix(in oklch, var(--c-strobe) 22%, transparent);
+  }
+
+  .nf__headline {
+    margin: 0 0 var(--s-7) calc(-0.04em);
+    max-width: 14ch;
+  }
+  .nf__line { display: block; }
+  .nf__line em {
+    font-style: normal;
+    color: var(--c-cyan);
+    font-feature-settings: "ss01";
+  }
+
+  .nf__sub {
+    color: var(--c-smoke);
+    max-width: 56ch;
+    margin: 0 0 var(--s-7) 0;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.55;
+  }
+
+  .nf__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  .nf__meta {
+    align-self: end;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    padding-block: clamp(1.25rem, 3vw, 2rem);
+    border-top: var(--rule-hairline);
+    color: var(--c-smoke-dim);
+    font-size: 0.7rem;
+    z-index: 2;
+    position: relative;
+  }
+  .nf__hr {
+    flex: 0 0 auto;
+    width: 0.5rem;
+    height: 1px;
+    background: color-mix(in oklch, var(--c-strobe) 18%, transparent);
+  }
+  @media (max-width: 600px) {
+    .nf__meta { flex-wrap: wrap; }
+  }
+</style>

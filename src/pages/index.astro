@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Venues from "../components/Venues.astro";
+import RecentNights from "../components/RecentNights.astro";
+import Strobe from "../components/Strobe.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<Layout
+  title="9 Degrees · Nightlife marketing in Kuala Lumpur"
+  description="9 Degrees is a Kuala Lumpur nightlife marketing agency. Currently shaping the nights at 404 Club Not Found and Nono Club. WhatsApp +60 17-949 8579."
+>
+  <main id="main">
+    <Hero />
+    <Venues />
+    <RecentNights />
+    <Strobe />
+  </main>
+  <SiteFooter />
+</Layout>
