@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(here, "..", "public");
 const markPath = path.join(publicDir, "img", "logo-mark.png");
-const outPath = path.join(publicDir, "og-image.png");
+const outPath = path.join(publicDir, "og-image-v2.png");
 
 const W = 1200;
 const H = 630;
@@ -110,4 +110,4 @@ await sharp(Buffer.from(headlineSvg))
   .toFile(outPath);
 
 const m = await sharp(outPath).metadata();
-console.log(`✓ og-image.png  ${m.width}x${m.height}  (${Math.round((m.size ?? 0) / 1024)}KB)`);
+console.log(`✓ og-image-v2.png  ${m.width}x${m.height}  (${Math.round((m.size ?? 0) / 1024)}KB)`);
