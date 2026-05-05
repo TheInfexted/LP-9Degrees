@@ -172,14 +172,16 @@ if (existsSync(cyanSrc)) {
 if (existsSync(fullSrc)) {
   console.log(`processing ${path.basename(fullSrc)}…`);
   await processFullLogo(fullSrc);
-  await generateFavicons(path.join(imgDir, "logo-mark.png"));
+  await generateFavicons(fullSrc);
 }
 
-async function generateFavicons(markPath) {
-  // Square the mark with brand-black padding so the cyan stripe isn't cropped.
-  const m = await sharp(markPath).metadata();
+async function generateFavicons(fullPath) {
+  // Use the full brand lockup (mark + NINE° wordmark, on black) as the icon
+  // source. Matches the LP-Ninedsales favicon: breathing room around the mark,
+  // wordmark grounds the lockup at larger sizes.
+  const m = await sharp(fullPath).metadata();
   const dim = Math.max(m.width, m.height);
-  const padded = await sharp(markPath)
+  const squared = await sharp(fullPath)
     .extend({
       top: Math.floor((dim - m.height) / 2),
       bottom: Math.ceil((dim - m.height) / 2),
@@ -197,7 +199,7 @@ async function generateFavicons(markPath) {
   ];
   for (const s of sizes) {
     const out = path.join(publicDir, s.name);
-    await sharp(padded)
+    await sharp(squared)
       .resize(s.px, s.px, { kernel: "lanczos3" })
       .png({ compressionLevel: 9 })
       .toFile(out);
